@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -35,14 +35,29 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Login() {
+
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
   const classes = useStyles();
 
   let handleSubmit = (event) => {
     // event.persist()
     event.preventDefault();
-    console.log(event)
+    console.log(`${name}, ${email}, ${password}`)
     
   }
+
+  let handleNameChange = (event) => {
+     setName(event.target.value)
+  }
+  let handleEmailChange = (event) => {
+    setEmail(event.target.value)
+ }
+ let handlePasswordChange = (event) => {
+  setPassword(event.target.value)
+}
 
   return (
     <Container component="main" maxWidth="xs">
@@ -60,19 +75,21 @@ export default function Login() {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                autoComplete="fname"
-                name="firstName"
+              onChange={(event) => {handleNameChange(event)}}
+                autoComplete="name"
+                name="Name"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
+                id="Name"
+                label="Name"
                 autoFocus
               />
             </Grid>
             
             <Grid item xs={12}>
               <TextField
+              onChange={(event) => {handleEmailChange(event)}}
                 variant="outlined"
                 required
                 fullWidth
@@ -84,6 +101,7 @@ export default function Login() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+              onChange={(event) => {handlePasswordChange(event)}}
                 variant="outlined"
                 required
                 fullWidth
