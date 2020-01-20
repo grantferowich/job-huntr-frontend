@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
-export default class Index extends Component {
+export default class Card extends Component {
   render() {
     return (
       <div>
-        <h1>Your Job Leads</h1>
+        <h2>Card Placeholder</h2>
       </div>
     );
   }

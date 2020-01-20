@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import AppBar from "@material-ui/core/AppBar";
 import Login from "./components/Login.js";
-import Index from "./components/Index.js";
+import Dashboard from "./components/Dashboard.js";
 class App extends React.Component {
   state = {
     loggedIn: false,
@@ -27,7 +27,7 @@ class App extends React.Component {
         </AppBar>
         {this.state.loggedIn === true ? (
           <div>
-            <Index />
+            <Dashboard />
           </div>
         ) : (
           <div>
