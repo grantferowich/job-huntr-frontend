@@ -12,8 +12,6 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-
-
 const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -34,30 +32,39 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Login() {
-
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
+export default function Login(props) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const classes = useStyles();
 
-  let handleSubmit = (event) => {
-    // event.persist()
-    event.preventDefault();
-    console.log(`${name}, ${email}, ${password}`)
-    
-  }
+  const API = "http://localhost:3000/users";
 
-  let handleNameChange = (event) => {
-     setName(event.target.value)
-  }
-  let handleEmailChange = (event) => {
-    setEmail(event.target.value)
- }
- let handlePasswordChange = (event) => {
-  setPassword(event.target.value)
-}
+  let handleSubmit = event => {
+    event.preventDefault();
+    console.log(`${name}, ${email}, ${password}`);
+    let data = { name: name, email: email, password: password };
+
+    fetch(API, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+    props.handleLogin(name, 1);
+  };
+
+  let handleNameChange = event => {
+    setName(event.target.value);
+  };
+  let handleEmailChange = event => {
+    setEmail(event.target.value);
+  };
+  let handlePasswordChange = event => {
+    setPassword(event.target.value);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -69,13 +76,17 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form 
-        onSubmit={ (event) => handleSubmit(event)}
-        className={classes.form} noValidate>
+        <form
+          onSubmit={event => handleSubmit(event)}
+          className={classes.form}
+          noValidate
+        >
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-              onChange={(event) => {handleNameChange(event)}}
+                onChange={event => {
+                  handleNameChange(event);
+                }}
                 autoComplete="name"
                 name="Name"
                 variant="outlined"
@@ -86,10 +97,12 @@ export default function Login() {
                 autoFocus
               />
             </Grid>
-            
+
             <Grid item xs={12}>
               <TextField
-              onChange={(event) => {handleEmailChange(event)}}
+                onChange={event => {
+                  handleEmailChange(event);
+                }}
                 variant="outlined"
                 required
                 fullWidth
@@ -101,7 +114,9 @@ export default function Login() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-              onChange={(event) => {handlePasswordChange(event)}}
+                onChange={event => {
+                  handlePasswordChange(event);
+                }}
                 variant="outlined"
                 required
                 fullWidth
@@ -131,8 +146,7 @@ export default function Login() {
           </Grid>
         </form>
       </div>
-      <Box mt={5}>
-      </Box>
+      <Box mt={5}></Box>
     </Container>
   );
 }
