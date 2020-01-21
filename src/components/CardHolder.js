@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import Card from "./Card";
+import LeadCard from "./LeadCard";
 
 export default class CardHolder extends Component {
   render() {
     return (
       <div className="CardHolder">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        <LeadCard />
+        <LeadCard />
+        <LeadCard />
+        <LeadCard />
+        <LeadCard />
       </div>
     );
   }
