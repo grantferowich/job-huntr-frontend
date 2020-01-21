@@ -3,14 +3,10 @@ import LeadCard from "./LeadCard";
 
 export default class CardHolder extends Component {
   render() {
-    return (
+    return this.props.leads.map(lead => (
       <div className="CardHolder">
-        <LeadCard />
-        <LeadCard />
-        <LeadCard />
-        <LeadCard />
-        <LeadCard />
+        <LeadCard lead={lead} />
       </div>
-    );
+    ));
   }
 }
