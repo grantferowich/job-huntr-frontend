@@ -43,7 +43,7 @@ export default function Login(props) {
   let handleSubmit = event => {
     event.preventDefault();
     console.log(`${name}, ${email}, ${password}`);
-    let data = { name: name, email: email, password: password };
+    let data = { name: name, email: email, password_digest: password };
 
     fetch(API, {
       method: "POST",
