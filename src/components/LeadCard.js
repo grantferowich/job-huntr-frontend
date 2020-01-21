@@ -23,18 +23,18 @@ const useStyles = makeStyles({
   }
 });
 
-export default function OutlinedCard() {
+export default function OutlinedCard(props) {
   const classes = useStyles();
 
   return (
     <Card className={classes.card} variant="outlined">
       <CardContent>
         <Typography variant="h5" component="h3">
-          {/* {this.props.lead.title} */}
+          {props.lead.title}
         </Typography>
 
         <Typography variant="body2" component="h4">
-          {/* {this.props.lead.company} */}
+          {props.lead.company}
         </Typography>
       </CardContent>
       <CardActions>
