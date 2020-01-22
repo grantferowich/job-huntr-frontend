@@ -5,7 +5,9 @@ export default class CardHolder extends Component {
   render() {
     return this.props.leads.map(lead => (
       <div className="CardHolder">
-        <LeadCard lead={lead} />
+        <LeadCard
+          handleCardClick={this.props.handleCardClick}
+          lead={lead} />
       </div>
     ));
   }

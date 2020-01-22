@@ -27,7 +27,8 @@ export default function OutlinedCard(props) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.card} variant="outlined">
+    <Card 
+    className={classes.card} variant="outlined">
       <CardContent>
         <Typography variant="h5" component="h3">
           {props.lead.title}
@@ -38,7 +39,10 @@ export default function OutlinedCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">SEE DETAILS</Button>
+        <Button
+          onClick={() => props.handleCardClick(props.lead)}
+          size="small">SEE DETAILS
+        </Button>
       </CardActions>
     </Card>
   );
