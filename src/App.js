@@ -13,11 +13,15 @@ class App extends React.Component {
   };
 
   handleLogin = user => {
-    this.setState({
-      loggedIn: true,
-      currentName: user.user.user.name,
-      currentId: user.user.user.id
-    });
+    if (user === true) {
+      this.setState({
+        loggedIn: true,
+        currentName: user.user.user.name,
+        currentId: user.user.user.id
+      });
+    } else {
+      alert("Please enter a valid email and password");
+    }
   };
 
   changeDisplay() {
