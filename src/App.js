@@ -13,20 +13,17 @@ class App extends React.Component {
   };
 
   handleLogin = user => {
-    if (user === true) {
+    if (user.jwt) {
       this.setState({
         loggedIn: true,
         currentName: user.user.user.name,
         currentId: user.user.user.id
       });
     } else {
-      alert("Please enter a valid email and password");
+      alert("Invalid email or password");
     }
   };
 
-  changeDisplay() {
-    return;
-  }
   render() {
     return (
       <Router>
