@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -44,8 +45,44 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
   const classes = useStyles();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  let handleEmailChange = event => {
+    setEmail(event.target.value);
+  };
+  let handlePasswordChange = event => {
+    setPassword(event.target.value);
+  };
+
+  const API = "http://localhost:3000/login";
+
+  
+
+  let handleSubmit = event => {
+    event.preventDefault();
+    console.log(`${email}, ${password}`);
+
+    let user = {
+      email: email,
+      password: password
+    }
+
+    fetch(API, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({user})
+    }).then(res => res.json())
+    .then(data => props.handleLogin(data));
+
+    
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -57,8 +94,13 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form
+          onSubmit={event => handleSubmit(event)}
+         className={classes.form} noValidate>
           <TextField
+          onChange={event => {
+            handleEmailChange(event)
+          }}
             variant="outlined"
             margin="normal"
             required
@@ -70,6 +112,9 @@ export default function SignIn() {
             autoFocus
           />
           <TextField
+           onChange={event => {
+            handlePasswordChange(event);
+          }}
             variant="outlined"
             margin="normal"
             required

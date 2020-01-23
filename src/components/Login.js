@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -43,7 +44,7 @@ export default function Login(props) {
   let handleSubmit = event => {
     event.preventDefault();
     console.log(`${name}, ${email}, ${password}`);
-    let data = { name: name, email: email, password_digest: password };
+    let user = { name: name, email: email, password: password };
 
     fetch(API, {
       method: "POST",
@@ -51,9 +52,11 @@ export default function Login(props) {
         "Content-Type": "application/json",
         Accept: "application/json"
       },
-      body: JSON.stringify(data)
-    });
-    props.handleLogin(name, 1);
+      body: JSON.stringify({user})
+    })
+    .then(res => res.json())
+    .then(data => props.handleLogin(data));;
+    
   };
 
   let handleNameChange = event => {

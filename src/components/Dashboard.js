@@ -4,11 +4,14 @@ import Container from "@material-ui/core/Container";
 import CardHolder from "./CardHolder";
 import LeadForm from "./LeadForm";
 import Typography from "@material-ui/core/Typography";
+import LeadSpec from "./LeadSpec";
 export default class Index extends Component {
   state = {
     HHBleads: [],
     HBleads: [],
-    IntLeads: []
+    IntLeads: [],
+    clicked: false,
+    clickedLead: null
   };
   API = "http://localhost:3000/leads";
 
@@ -16,6 +19,13 @@ export default class Index extends Component {
     fetch(this.API)
       .then(r => r.json())
       .then(data => this.leadsFilter(data));
+  }
+  
+  handleCardClick = (lead) => {
+    this.setState({
+      clicked: !this.state.clicked,
+      clickedLead: lead
+    }, () => console.log(this.state))
   }
 
   leadsFilter = data => {
@@ -34,6 +44,7 @@ export default class Index extends Component {
 
   render() {
     return (
+      (this.state.clicked === false) ? (
       <div>
         <LeadForm></LeadForm>
         <Typography variant="heading2" component="h2">
@@ -44,25 +55,38 @@ export default class Index extends Component {
           <Grid item xs={4}>
             <Container>
               Haven't Heard Back
-              <CardHolder leads={this.state.HHBleads} />
+              <CardHolder
+                handleCardClick = {this.handleCardClick}
+                leads={this.state.HHBleads} />
             </Container>
           </Grid>
 
           <Grid item xs={4}>
             <Container>
               Heard Back
-              <CardHolder leads={this.state.HBleads} />
+              <CardHolder
+                handleCardClick = {this.handleCardClick}
+                leads={this.state.HBleads} />
             </Container>
           </Grid>
 
           <Grid item xs={4}>
             <Container>
               Interviewed
-              <CardHolder leads={this.state.IntLeads} />
+              <CardHolder
+                handleCardClick = {this.handleCardClick}
+                leads={this.state.IntLeads} />
             </Container>
           </Grid>
         </Grid>
+    </div> ) 
+              :
+    
+    (
+      <div>
+        <LeadSpec lead={this.state.clickedLead}/>
       </div>
+    )
     );
   }
 }

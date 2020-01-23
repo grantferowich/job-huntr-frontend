@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import AppBar from "@material-ui/core/AppBar";
+import Signin from "./components/Signin.js";
 import Login from "./components/Login.js";
 import Dashboard from "./components/Dashboard.js";
 class App extends React.Component {
@@ -10,8 +11,9 @@ class App extends React.Component {
     currentId: ""
   };
 
-  handleLogin = (name, id) => {
-    this.setState({ loggedIn: true, currentName: name, currentId: id }, () =>
+  handleLogin = (user) => {
+    console.log(user)
+    this.setState({ loggedIn: true, currentName: user.user.user.name, currentId: user.user.user.id }, () =>
       console.log(this.state)
     );
   };
@@ -32,6 +34,7 @@ class App extends React.Component {
         ) : (
           <div>
             <Login handleLogin={this.handleLogin} />
+            <Signin handleLogin={this.handleLogin}/>
           </div>
         )}
         ;
