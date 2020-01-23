@@ -20,6 +20,7 @@ export default class Index extends Component {
       .then(r => r.json())
       .then(data => this.leadsFilter(data));
   }
+  
   handleCardClick = (lead) => {
     this.setState({
       clicked: !this.state.clicked,
