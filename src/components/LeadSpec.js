@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState, useEffect } from "react";
 import NoteCard from "./NoteCard";
 import NoteForm from "./NoteForm";
 import { Fragment } from 'react'
@@ -21,13 +22,41 @@ const useStyles = makeStyles(theme => ({
     },
 
   }));
+
+ 
   
   
 
 
 
 export default function Leadspec(props) {
+
+    useEffect(() => {
+        getLeadNotes()
+    }, [])
+
+    const API = 'http://localhost:3000/notes'
+
+    const [data, setData] = useState([])
+
+    let getLeadNotes = () => {
+        fetch(API)
+        .then(res => res.json())
+        .then(data => {
+            setData(data.filter(note => note.lead_id === props.lead.id))
+        })
+    }
+
+ 
+
+
+
+    const [clicked, setClicked] = useState(false)
     const classes = useStyles();
+
+    let handleAddNoteClick = () => {
+        setClicked(!clicked)
+    }
 
         return (
             <Fragment>
@@ -54,15 +83,36 @@ export default function Leadspec(props) {
              <h3>Description: {props.lead.description}</h3>
             </div>
             
-            <Fab color="secondary" variant="extended" aria-label="edit">
-              <EditIcon className={classes.extendedIcon}/>
-              Add a note
+            <Fab
+                onClick={() => handleAddNoteClick()}
+                color="secondary"
+                variant="extended"
+                aria-label="edit">
+                <EditIcon className={classes.extendedIcon}/>
+                    Add a note
             </Fab>
-            <NoteForm leadId={props.lead.id}/>
-            <NoteCard/>
+            {clicked === true ? (
+            <div>
+                <NoteForm leadId={props.lead.id}/>
+            </div>
+          ) : (
+            <div>
+            </div>
+          )}
+          <h3>Your notes: </h3>
+          {data.map(leadNote => (
+        <NoteCard
+            id={leadNote.id}
+            note={leadNote}
+         />
+      ))}
             </Fragment>
 
           
-        )
+    )
+
+        
     
 }
+
+
