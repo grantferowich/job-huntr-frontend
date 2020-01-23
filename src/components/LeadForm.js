@@ -56,14 +56,14 @@ export default function LeadForm(props) {
 
   let handleSubmit = event => {
     event.preventDefault();
-    console.log(`${title}, ${company}, ${location}, ${description}`);
+    console.log(props.currentId);
     let data = {
       title: title,
       company: company,
       location: location,
       description: description,
       status: status,
-      user_id: 1
+      user_id: props.currentId
     };
 
     fetch(API, {

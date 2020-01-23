@@ -13,25 +13,34 @@ export default class Index extends Component {
     clicked: false,
     clickedLead: null
   };
+
   API = "http://localhost:3000/leads";
 
   componentDidMount() {
+    console.log("currentId:", this.props.currentId);
     fetch(this.API)
       .then(r => r.json())
       .then(data => this.leadsFilter(data));
   }
-  
-  handleCardClick = (lead) => {
-    this.setState({
-      clicked: !this.state.clicked,
-      clickedLead: lead
-    }, () => console.log(this.state))
-  }
+
+  handleCardClick = lead => {
+    this.setState(
+      {
+        clicked: !this.state.clicked,
+        clickedLead: lead
+      },
+      () => console.log(this.state)
+    );
+  };
 
   leadsFilter = data => {
-    let HHBleads = data.filter(lead => lead.status === "Haven't Heard Back");
-    let HBleads = data.filter(lead => lead.status === "Heard Back");
-    let IntLeads = data.filter(lead => lead.status === "Interviewed");
+    let userLeads = data.filter(lead => lead.user_id === this.props.currentId);
+
+    let HHBleads = userLeads.filter(
+      lead => lead.status === "Haven't Heard Back"
+    );
+    let HBleads = userLeads.filter(lead => lead.status === "Heard Back");
+    let IntLeads = userLeads.filter(lead => lead.status === "Interviewed");
     this.setState(
       {
         HHBleads: HHBleads,
@@ -43,10 +52,9 @@ export default class Index extends Component {
   };
 
   render() {
-    return (
-      (this.state.clicked === false) ? (
+    return this.state.clicked === false ? (
       <div>
-        <LeadForm></LeadForm>
+        <LeadForm currentId={this.props.currentId}></LeadForm>
         <Typography variant="heading2" component="h2">
           Your Job Leads
         </Typography>
@@ -56,8 +64,9 @@ export default class Index extends Component {
             <Container>
               Haven't Heard Back
               <CardHolder
-                handleCardClick = {this.handleCardClick}
-                leads={this.state.HHBleads} />
+                handleCardClick={this.handleCardClick}
+                leads={this.state.HHBleads}
+              />
             </Container>
           </Grid>
 
@@ -65,8 +74,9 @@ export default class Index extends Component {
             <Container>
               Heard Back
               <CardHolder
-                handleCardClick = {this.handleCardClick}
-                leads={this.state.HBleads} />
+                handleCardClick={this.handleCardClick}
+                leads={this.state.HBleads}
+              />
             </Container>
           </Grid>
 
@@ -74,19 +84,17 @@ export default class Index extends Component {
             <Container>
               Interviewed
               <CardHolder
-                handleCardClick = {this.handleCardClick}
-                leads={this.state.IntLeads} />
+                handleCardClick={this.handleCardClick}
+                leads={this.state.IntLeads}
+              />
             </Container>
           </Grid>
         </Grid>
-    </div> ) 
-              :
-    
-    (
-      <div>
-        <LeadSpec lead={this.state.clickedLead}/>
       </div>
-    )
+    ) : (
+      <div>
+        <LeadSpec lead={this.state.clickedLead} />
+      </div>
     );
   }
 }

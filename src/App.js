@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import AppBar from "@material-ui/core/AppBar";
 import Signin from "./components/Signin.js";
-import Login from "./components/Login.js";
+import Signup from "./components/Signup.js";
 import Dashboard from "./components/Dashboard.js";
 class App extends React.Component {
   state = {
@@ -11,11 +11,12 @@ class App extends React.Component {
     currentId: ""
   };
 
-  handleLogin = (user) => {
-    console.log(user)
-    this.setState({ loggedIn: true, currentName: user.user.user.name, currentId: user.user.user.id }, () =>
-      console.log(this.state)
-    );
+  handleLogin = user => {
+    this.setState({
+      loggedIn: true,
+      currentName: user.user.user.name,
+      currentId: user.user.user.id
+    });
   };
 
   changeDisplay() {
@@ -29,12 +30,12 @@ class App extends React.Component {
         </AppBar>
         {this.state.loggedIn === true ? (
           <div>
-            <Dashboard />
+            <Dashboard currentId={this.state.currentId} />
           </div>
         ) : (
           <div>
-            <Login handleLogin={this.handleLogin} />
-            <Signin handleLogin={this.handleLogin}/>
+            <Signup handleLogin={this.handleLogin} />
+            <Signin handleLogin={this.handleLogin} />
           </div>
         )}
         ;
