@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -33,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Login(props) {
+export default function Signup(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -52,11 +51,10 @@ export default function Login(props) {
         "Content-Type": "application/json",
         Accept: "application/json"
       },
-      body: JSON.stringify({user})
+      body: JSON.stringify({ user })
     })
-    .then(res => res.json())
-    .then(data => props.handleLogin(data));;
-    
+      .then(res => res.json())
+      .then(data => props.handleLogin(data));
   };
 
   let handleNameChange = event => {
