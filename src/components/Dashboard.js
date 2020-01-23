@@ -93,7 +93,9 @@ export default class Index extends Component {
       </div>
     ) : (
       <div>
-        <LeadSpec lead={this.state.clickedLead} />
+        <LeadSpec
+        handleCardClick={this.handleCardClick}
+        lead={this.state.clickedLead} />
       </div>
     );
   }

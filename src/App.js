@@ -13,6 +13,7 @@ class App extends React.Component {
   };
 
   handleLogin = user => {
+    console.log(user)
     this.setState({
       loggedIn: true,
       currentName: user.user.user.name,
