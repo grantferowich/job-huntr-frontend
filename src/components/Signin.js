@@ -60,8 +60,6 @@ export default function SignIn(props) {
 
   const API = "http://localhost:3000/login";
 
-  
-
   let handleSubmit = event => {
     event.preventDefault();
     console.log(`${email}, ${password}`);
@@ -69,7 +67,7 @@ export default function SignIn(props) {
     let user = {
       email: email,
       password: password
-    }
+    };
 
     fetch(API, {
       method: "POST",
@@ -77,11 +75,10 @@ export default function SignIn(props) {
         "Content-Type": "application/json",
         Accept: "application/json"
       },
-      body: JSON.stringify({user})
-    }).then(res => res.json())
-    .then(data => props.handleLogin(data));
-
-    
+      body: JSON.stringify({ user })
+    })
+      .then(res => res.json())
+      .then(data => props.handleLogin(data));
   };
 
   return (
@@ -96,11 +93,13 @@ export default function SignIn(props) {
         </Typography>
         <form
           onSubmit={event => handleSubmit(event)}
-         className={classes.form} noValidate>
+          className={classes.form}
+          noValidate
+        >
           <TextField
-          onChange={event => {
-            handleEmailChange(event)
-          }}
+            onChange={event => {
+              handleEmailChange(event);
+            }}
             variant="outlined"
             margin="normal"
             required
@@ -112,9 +111,9 @@ export default function SignIn(props) {
             autoFocus
           />
           <TextField
-           onChange={event => {
-            handlePasswordChange(event);
-          }}
+            onChange={event => {
+              handlePasswordChange(event);
+            }}
             variant="outlined"
             margin="normal"
             required
@@ -136,7 +135,7 @@ export default function SignIn(props) {
           </Button>
           <Grid container>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
