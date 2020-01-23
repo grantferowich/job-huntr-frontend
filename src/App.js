@@ -13,20 +13,16 @@ class App extends React.Component {
   };
 
   handleLogin = user => {
-    if (user === true) {
+    
       this.setState({
         loggedIn: true,
         currentName: user.user.user.name,
         currentId: user.user.user.id
       });
-    } else {
-      alert("Please enter a valid email and password");
-    }
+   
   };
 
-  changeDisplay() {
-    return;
-  }
+ 
   render() {
     return (
       <Router>
@@ -56,7 +52,7 @@ class App extends React.Component {
               />
             </div>
           )}
-          ;
+          
         </div>
       </Router>
     );

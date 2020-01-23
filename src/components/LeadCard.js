@@ -23,8 +23,14 @@ const useStyles = makeStyles({
   }
 });
 
-export default function OutlinedCard(props) {
+export default function LeadCard(props) {
   const classes = useStyles();
+  
+  function showProps(){
+    console.log(props.lead.created_at)
+  }
+
+  showProps()
 
   return (
     <Card 
