@@ -1,4 +1,6 @@
 import React from 'react'
+import NoteCard from "./NoteCard";
+import NoteForm from "./NoteForm";
 import { Fragment } from 'react'
 import HomeSharpIcon from '@material-ui/icons/HomeSharp';
 import { makeStyles } from '@material-ui/core/styles';
@@ -56,6 +58,8 @@ export default function Leadspec(props) {
               <EditIcon className={classes.extendedIcon}/>
               Add a note
             </Fab>
+            <NoteForm leadId={props.lead.id}/>
+            <NoteCard/>
             </Fragment>
 
           
