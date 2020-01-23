@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Signin from "./components/Signin.js";
 import Signup from "./components/Signup.js";
@@ -24,22 +25,36 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div>
-        <AppBar color="primary" position="static">
-          <h1>Job Huntr</h1>
-        </AppBar>
-        {this.state.loggedIn === true ? (
-          <div>
-            <Dashboard currentId={this.state.currentId} />
-          </div>
-        ) : (
-          <div>
-            <Signup handleLogin={this.handleLogin} />
-            <Signin handleLogin={this.handleLogin} />
-          </div>
-        )}
-        ;
-      </div>
+      <Router>
+        <div>
+          <AppBar color="primary" position="static">
+            <h1>Job Huntr</h1>
+          </AppBar>
+          {this.state.loggedIn === true ? (
+            <div>
+              <Dashboard currentId={this.state.currentId} />
+            </div>
+          ) : (
+            <div>
+              <Route
+                exact
+                path="/"
+                render={props => (
+                  <Signup {...props} handleLogin={this.handleLogin} />
+                )}
+              />
+              <Route
+                exact
+                path="/signin"
+                render={props => (
+                  <Signin {...props} handleLogin={this.handleLogin} />
+                )}
+              />
+            </div>
+          )}
+          ;
+        </div>
+      </Router>
     );
   }
 }
