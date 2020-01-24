@@ -32,6 +32,11 @@ export default class Index extends Component {
       .then(data => this.leadsFilter(data));
   }
 
+  handleHomeClick = () => {
+    this.setState({
+      clicked: false
+    });
+  };
   handleCardClick = lead => {
     this.setState(
       {
@@ -61,14 +66,13 @@ export default class Index extends Component {
   };
 
   render() {
-    
     return this.state.clicked === false ? (
       <div>
         <NavBar
-        handleCardClick={this.handleCardClick}
-        handleLogout={this.props.handleLogout}
-        loggedIn={true}
-        currentName={this.props.currentName}
+          handleCardClick={this.handleHomeClick}
+          handleLogout={this.props.handleLogout}
+          loggedIn={true}
+          currentName={this.props.currentName}
         />
         <LeadForm
           currentId={this.props.currentId}
@@ -122,17 +126,13 @@ export default class Index extends Component {
     ) : (
       <div>
         <NavBar
-        handleCardClick={this.handleCardClick}
-        handleLogout={this.props.handleLogout}
-        currentName={this.props.currentName}
-        loggedIn={true}
+          handleCardClick={this.handleHomeClick}
+          handleLogout={this.props.handleLogout}
+          currentName={this.props.currentName}
+          loggedIn={true}
         />
-        <LeadSpec
-          lead={this.state.clickedLead}
-          newFetch={this.newFetch}
-        />
+        <LeadSpec lead={this.state.clickedLead} newFetch={this.newFetch} />
       </div>
     );
-  
   }
 }
