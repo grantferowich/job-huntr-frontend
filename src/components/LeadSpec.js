@@ -87,54 +87,38 @@ export default function Leadspec(props) {
       {statusClicked === true ? (
         <Grid item size="xs">
           <div>
-            <StatusForm leadId={props.lead.id} />
+            <StatusForm leadId={props.lead.id} newFetch={props.newFetch} />
           </div>
         </Grid>
       ) : (
         <div></div>
       )}
       <br></br>
-
-      <Grid container direction="column" justify="center" alignment="center">
-        <h3>Your notes: </h3>
-        <Grid item xs={4}>
-          <div>
-            {data.map(leadNote => (
-              <NoteCard id={leadNote.id} note={leadNote} />
-            ))}
-          </div>
-        </Grid>
+      <h3>Your notes: </h3>
+      <Grid item xs={4}>
         <div>
-          <Grid item size="xs" alignItems="center">
-            <Fab
-              onClick={() => handleAddNoteClick()}
-              color="secondary"
-              variant="extended"
-              aria-label="edit"
-            >
-              <ChatBubbleSharpIcon className={classes.extendedIcon} />
-              Add a note
-            </Fab>
-            {clicked === true ? (
-            <div>
-                <NoteForm
-                getLeadNotes={() => getLeadNotes}
-                 leadId={props.lead.id}/>
-            </div>
-          ) : (
-            <div>
-            </div>
-          )}
-          <h3>Your notes: </h3>
           {data.map(leadNote => (
-        <NoteCard
-            id={leadNote.id}
-            note={leadNote}
-         />
-      ))}
-            </Fragment>
+            <NoteCard id={leadNote.id} note={leadNote} />
+          ))}
+        </div>
+      </Grid>
 
-          
-    )
-
+      <Fab
+        onClick={() => handleAddNoteClick()}
+        color="secondary"
+        variant="extended"
+        aria-label="edit"
+      >
+        <ChatBubbleSharpIcon className={classes.extendedIcon} />
+        Add a note
+      </Fab>
+      {clicked === true ? (
+        <div>
+          <NoteForm getLeadNotes={() => getLeadNotes} leadId={props.lead.id} />
+        </div>
+      ) : (
+        <div></div>
+      )}
+    </Fragment>
+  );
 }
