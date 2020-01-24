@@ -24,7 +24,6 @@ class App extends React.Component {
     }
   };
 
-
   render() {
     return (
       <Router>
@@ -54,7 +53,6 @@ class App extends React.Component {
               />
             </div>
           )}
-          
         </div>
       </Router>
     );

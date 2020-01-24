@@ -5,6 +5,7 @@ import CardHolder from "./CardHolder";
 import LeadForm from "./LeadForm";
 import Typography from "@material-ui/core/Typography";
 import LeadSpec from "./LeadSpec";
+
 export default class Index extends Component {
   state = {
     HHBleads: [],
@@ -16,8 +17,14 @@ export default class Index extends Component {
 
   API = "http://localhost:3000/leads";
 
+  newFetch = () => {
+    fetch(this.API)
+      .then(r => r.json())
+      .then(data => this.leadsFilter(data));
+  };
+
   componentDidMount() {
-    console.log("currentId:", this.props.currentId);
+    // console.log("currentId:", this.props.currentId);
     fetch(this.API)
       .then(r => r.json())
       .then(data => this.leadsFilter(data));
@@ -54,15 +61,20 @@ export default class Index extends Component {
   render() {
     return this.state.clicked === false ? (
       <div>
-        <LeadForm currentId={this.props.currentId}></LeadForm>
-        <Typography variant="heading2" component="h2">
+        <LeadForm
+          currentId={this.props.currentId}
+          newFetch={this.newFetch}
+        ></LeadForm>
+        <Typography variant="heading2" component="h2" align="center">
           Your Job Leads
         </Typography>
 
         <Grid container spacing={2}>
           <Grid item xs={4}>
             <Container>
-              Haven't Heard Back
+              <Typography variant="heading3" component="h3">
+                Haven't Heard Back
+              </Typography>
               <CardHolder
                 handleCardClick={this.handleCardClick}
                 leads={this.state.HHBleads}
@@ -72,7 +84,9 @@ export default class Index extends Component {
 
           <Grid item xs={4}>
             <Container>
-              Heard Back
+              <Typography variant="heading3" component="h3">
+                Heard Back
+              </Typography>
               <CardHolder
                 handleCardClick={this.handleCardClick}
                 leads={this.state.HBleads}
@@ -82,7 +96,9 @@ export default class Index extends Component {
 
           <Grid item xs={4}>
             <Container>
-              Interviewed
+              <Typography variant="heading3" component="h3">
+                Interviewed
+              </Typography>
               <CardHolder
                 handleCardClick={this.handleCardClick}
                 leads={this.state.IntLeads}
@@ -94,8 +110,9 @@ export default class Index extends Component {
     ) : (
       <div>
         <LeadSpec
-        handleCardClick={this.handleCardClick}
-        lead={this.state.clickedLead} />
+          handleCardClick={this.handleCardClick}
+          lead={this.state.clickedLead}
+        />
       </div>
     );
   }
