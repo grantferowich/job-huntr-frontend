@@ -26,11 +26,20 @@ const useStyles = makeStyles({
 export default function LeadCard(props) {
   const classes = useStyles();
   
-  function showProps(){
-    console.log(props.lead.created_at)
-  }
+  // function showProps(){
+  //   console.log(props.lead.created_at)
+  // }
 
-  showProps()
+  // showProps()
+
+
+
+  const mystyle = {
+    color: "white",
+    backgroundColor: "DodgerBlue",
+    padding: "10px",
+    fontFamily: "Arial"
+  };
 
   return (
     <Card 
