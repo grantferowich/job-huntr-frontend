@@ -2,12 +2,14 @@ import React from 'react'
 import { useState, useEffect } from "react";
 import NoteCard from "./NoteCard";
 import NoteForm from "./NoteForm";
+import StatusForm from './StatusForm'
 import { Fragment } from 'react'
 import HomeSharpIcon from '@material-ui/icons/HomeSharp';
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 // import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
+import ChatBubbleSharpIcon from '@material-ui/icons/ChatBubbleSharp';
 // import FavoriteIcon from '@material-ui/icons/Favorite';
 // import NavigationIcon from '@material-ui/icons/Navigation';
 
@@ -31,13 +33,18 @@ const useStyles = makeStyles(theme => ({
 
 export default function Leadspec(props) {
 
+    const API = 'http://localhost:3000/notes'
+    const [data, setData] = useState([])
+    const [clicked, setClicked] = useState(false)
+    const [statusClicked, setStatusClicked] = useState(false)
+    const classes = useStyles();
+
+
     useEffect(() => {
         getLeadNotes()
     }, [])
 
-    const API = 'http://localhost:3000/notes'
-
-    const [data, setData] = useState([])
+   
 
     let getLeadNotes = () => {
         fetch(API)
@@ -51,12 +58,16 @@ export default function Leadspec(props) {
 
 
 
-    const [clicked, setClicked] = useState(false)
-    const classes = useStyles();
 
     let handleAddNoteClick = () => {
         setClicked(!clicked)
     }
+
+    let handleChangeStatusClick = () => {
+        setStatusClicked(!statusClicked)
+    }
+
+   
 
         return (
             <Fragment>
@@ -82,13 +93,30 @@ export default function Leadspec(props) {
              <h3>Location: {props.lead.location}</h3>
              <h3>Description: {props.lead.description}</h3>
             </div>
-            
+
+            <Fab
+                onClick={() => handleChangeStatusClick()}
+                color="secondary"
+                variant="extended"
+                aria-label="edit">
+                <EditIcon className={classes.extendedIcon}/>
+                    Update Status
+            </Fab>
+            {statusClicked === true ? (
+            <div>
+                <StatusForm leadId={props.lead.id}/>
+            </div>
+          ) : (
+            <div>
+            </div>
+          )}
+            <br></br>
             <Fab
                 onClick={() => handleAddNoteClick()}
                 color="secondary"
                 variant="extended"
                 aria-label="edit">
-                <EditIcon className={classes.extendedIcon}/>
+                <ChatBubbleSharpIcon className={classes.extendedIcon}/>
                     Add a note
             </Fab>
             {clicked === true ? (
