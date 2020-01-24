@@ -73,7 +73,7 @@ export default function LeadForm(props) {
         Accept: "application/json"
       },
       body: JSON.stringify(data)
-    });
+    }).then(props.newFetch());
   };
 
   const handleStatusChange = event => {
