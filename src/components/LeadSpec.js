@@ -112,7 +112,9 @@ export default function Leadspec(props) {
             </Fab>
             {clicked === true ? (
             <div>
-                <NoteForm leadId={props.lead.id}/>
+                <NoteForm
+                getLeadNotes={() => getLeadNotes}
+                 leadId={props.lead.id}/>
             </div>
           ) : (
             <div>

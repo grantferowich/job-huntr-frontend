@@ -23,6 +23,22 @@ const useStyles = makeStyles({
 export default function NoteCard(props) {
       
       const classes = useStyles();
+
+
+    let createDate = () => {
+      const date = props.note.created_at.split("-")
+      let year = date[0]
+      let month = date[1]
+      let day = date[2].split("")
+      day.splice(2)
+      let newDate = day.join('')
+      const fullDate = `${month}/${newDate}/${year}`
+      return fullDate
+        }
+
+      
+
+
         
       return (
                <Card 
@@ -32,8 +48,8 @@ export default function NoteCard(props) {
              {props.note.content}
         </Typography>
 
-        <Typography variant="body2" component="h4">
-            Created at {props.note.created_at}
+        <Typography variant="body4" component="h6">
+            Created at {createDate()}
         </Typography>
       </CardContent>
  </Card>

@@ -76,6 +76,7 @@ export default class Index extends Component {
                 Haven't Heard Back
               </Typography>
               <CardHolder
+              key={1}
                 handleCardClick={this.handleCardClick}
                 leads={this.state.HHBleads}
               />
@@ -88,6 +89,7 @@ export default class Index extends Component {
                 Heard Back
               </Typography>
               <CardHolder
+              key={2}
                 handleCardClick={this.handleCardClick}
                 leads={this.state.HBleads}
               />
@@ -100,6 +102,7 @@ export default class Index extends Component {
                 Interviewed
               </Typography>
               <CardHolder
+                key={3}
                 handleCardClick={this.handleCardClick}
                 leads={this.state.IntLeads}
               />
