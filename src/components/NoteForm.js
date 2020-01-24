@@ -7,11 +7,10 @@ import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import AssignmentSharpIcon from '@material-ui/icons/AssignmentSharp';import Typography from "@material-ui/core/Typography";
+import AssignmentSharpIcon from "@material-ui/icons/AssignmentSharp";
+import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-
-
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -42,7 +41,6 @@ export default function NoteForm(props) {
     setNote(event.target.value);
   };
 
-
   const API = "http://localhost:3000/notes";
 
   let handleSubmit = event => {
@@ -60,8 +58,7 @@ export default function NoteForm(props) {
         Accept: "application/json"
       },
       body: JSON.stringify({ lead_id: props.leadId, content: note })
-    })
-      
+    }).then(props.getLeadNotes());
   };
 
   return (
@@ -93,7 +90,7 @@ export default function NoteForm(props) {
             autoComplete="note"
             autoFocus
           />
-          
+
           <Button
             type="submit"
             fullWidth
@@ -103,11 +100,9 @@ export default function NoteForm(props) {
           >
             Add Note
           </Button>
-          
         </form>
       </div>
-      <Box mt={8}>
-      </Box>
+      <Box mt={8}></Box>
     </Container>
   );
 }

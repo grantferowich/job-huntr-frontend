@@ -7,11 +7,8 @@ import { Fragment } from 'react'
 import HomeSharpIcon from '@material-ui/icons/HomeSharp';
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
-// import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import ChatBubbleSharpIcon from '@material-ui/icons/ChatBubbleSharp';
-// import FavoriteIcon from '@material-ui/icons/Favorite';
-// import NavigationIcon from '@material-ui/icons/Navigation';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -79,13 +76,7 @@ export default function Leadspec(props) {
                 <HomeSharpIcon />
             </Fab>
             
-            {/* <Fab variant="extended">
-              <NavigationIcon  />
-              Navigate
-            </Fab>
-            <Fab disabled aria-label="like">
-              <FavoriteIcon />
-            </Fab> */}
+          
         
         <div>     
              <h1>Job Title: {props.lead.title}</h1>
@@ -142,5 +133,4 @@ export default function Leadspec(props) {
         
     
 }
-
 
