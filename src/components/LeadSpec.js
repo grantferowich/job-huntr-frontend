@@ -10,17 +10,24 @@ import Fab from "@material-ui/core/Fab";
 import EditIcon from "@material-ui/icons/Edit";
 import ChatBubbleSharpIcon from "@material-ui/icons/ChatBubbleSharp";
 import Grid from "@material-ui/core/Grid";
-
 const useStyles = makeStyles(theme => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
   root: {
     "& > *": {
       margin: theme.spacing(1)
     }
   },
   extendedIcon: {
+
     marginRight: theme.spacing(1)
   }
 }));
+
 
 export default function Leadspec(props) {
   const API = "http://localhost:3000/notes";
@@ -29,9 +36,11 @@ export default function Leadspec(props) {
   const [statusClicked, setStatusClicked] = useState(false);
   const classes = useStyles();
 
+
   useEffect(() => {
     getLeadNotes();
   }, []);
+
 
   let getLeadNotes = () => {
     fetch(API)
@@ -44,7 +53,6 @@ export default function Leadspec(props) {
   let handleAddNoteClick = () => {
     setClicked(!clicked);
   };
-
   let handleChangeStatusClick = () => {
     setStatusClicked(!statusClicked);
   };
@@ -63,26 +71,21 @@ export default function Leadspec(props) {
           <h2>Company: {props.lead.company}</h2>
           <h3>Location: {props.lead.location}</h3>
           <h3>Description: {props.lead.description}</h3>
+          <h3>Status: {props.lead.status}</h3>
         </div>
       </Grid>
-
-      <Fab
-        onClick={() => props.handleCardClick()}
-        color="primary"
-        aria-label="add"
-      >
-        <HomeSharpIcon />
-      </Fab>
-
-      <Fab
-        onClick={() => handleChangeStatusClick()}
-        color="secondary"
-        variant="extended"
-        aria-label="edit"
-      >
-        <EditIcon className={classes.extendedIcon} />
-        Update Status
-      </Fab>
+      <div className={classes.paper}>
+        
+        <Fab
+          onClick={() => handleChangeStatusClick()}
+          color="secondary"
+          variant="extended"
+          aria-label="edit"
+        >
+          <EditIcon className={classes.extendedIcon} />
+          Update Status
+        </Fab>
+      </div>
 
       {statusClicked === true ? (
         <Grid item size="xs">

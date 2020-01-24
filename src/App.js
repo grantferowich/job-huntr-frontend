@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Signin from "./components/Signin.js";
 import Signup from "./components/Signup.js";
 import Dashboard from "./components/Dashboard.js";
-import NavBar from "./components/NavBar.js";
+import AppBar from "@material-ui/core/AppBar";
+
 
 class App extends React.Component {
   state = {
@@ -40,17 +41,22 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <NavBar
-            loggedIn={this.state.loggedIn}
-            handleLogout={this.handleLogout}
-          />
+         
           {this.state.loggedIn === true ? (
             <div>
-              <Dashboard currentId={this.state.currentId} />
+              <Dashboard
+              handleLogout={this.handleLogout}
+              currentName={this.state.currentName} 
+               currentId={this.state.currentId} />
             </div>
           ) : (
+            
             <div>
+              <AppBar color="primary" position="static">
+          <h1>Job Huntr</h1>
+        </AppBar>
               <Route
+              
                 exact
                 path="/"
                 render={props => (
