@@ -1,10 +1,11 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import AppBar from "@material-ui/core/AppBar";
 import Signin from "./components/Signin.js";
 import Signup from "./components/Signup.js";
 import Dashboard from "./components/Dashboard.js";
+import NavBar from "./components/NavBar.js";
+
 class App extends React.Component {
   state = {
     loggedIn: false,
@@ -24,13 +25,25 @@ class App extends React.Component {
     }
   };
 
+  handleLogout = () => {
+    this.setState({
+      loggedIn: false,
+      currentName: "",
+      currentId: ""
+    })
+  }
+  
+
+ 
+
   render() {
     return (
       <Router>
         <div>
-          <AppBar color="primary" position="static">
-            <h1>Job Huntr</h1>
-          </AppBar>
+          <NavBar
+            loggedIn={this.state.loggedIn}
+            handleLogout={this.handleLogout}
+          />
           {this.state.loggedIn === true ? (
             <div>
               <Dashboard currentId={this.state.currentId} />

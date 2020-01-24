@@ -46,17 +46,17 @@ export default function LeadCard(props) {
     className={classes.card} variant="outlined">
       <CardContent>
         <Typography variant="h5" component="h3">
-          {props.lead.title}
+        {props.lead.company}
         </Typography>
 
         <Typography variant="body2" component="h4">
-          {props.lead.company}
+        {props.lead.title}
         </Typography>
       </CardContent>
       <CardActions>
         <Button
           onClick={() => props.handleCardClick(props.lead)}
-          size="small">SEE DETAILS
+          size="small">SEE DEETS
         </Button>
       </CardActions>
     </Card>
