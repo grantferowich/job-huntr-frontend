@@ -68,13 +68,7 @@ export default function Leadspec(props) {
 
         return (
             <Fragment>
-                <div></div>
-            <Fab
-                onClick={() => props.handleCardClick()}
-                color="primary"
-                aria-label="add">
-                <HomeSharpIcon />
-            </Fab>
+            
             
           
         

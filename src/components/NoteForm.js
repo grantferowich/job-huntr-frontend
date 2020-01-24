@@ -45,6 +45,7 @@ export default function NoteForm(props) {
 
   let handleSubmit = event => {
     event.preventDefault();
+    
 
     // let data = {
     //     lead_id: props.leadId,
@@ -58,7 +59,7 @@ export default function NoteForm(props) {
         Accept: "application/json"
       },
       body: JSON.stringify({ lead_id: props.leadId, content: note })
-    }).then(props.getLeadNotes());
+    }).then(props.getLeadNotes()).then(setNote(''));
   };
 
   return (

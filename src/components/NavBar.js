@@ -23,16 +23,25 @@ export default function NavBar(props) {
   let handleClick = () => {
       props.handleLogout()
   }
+  let handleIconClick = () => {
+      props.handleCardClick()
+  }
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
+            <IconButton
+            onClick={() => handleIconClick()}>
           <TrackChangesSharpIcon/>
-          <br></br>
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            {props.currentName}
+          </Typography>
           <Typography variant="h6" className={classes.title}>
             Job Huntr
           </Typography>
+
           {props.loggedIn === true ? (
 <Button onClick={() => handleClick()} color="inherit">Logout</Button>
     

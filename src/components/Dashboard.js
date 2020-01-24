@@ -1,8 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import CardHolder from "./CardHolder";
 import LeadForm from "./LeadForm";
+import NavBar from "./NavBar.js";
+
 import Typography from "@material-ui/core/Typography";
 import LeadSpec from "./LeadSpec";
 
@@ -59,8 +61,15 @@ export default class Index extends Component {
   };
 
   render() {
+    
     return this.state.clicked === false ? (
       <div>
+        <NavBar
+        handleCardClick={this.handleCardClick}
+        handleLogout={this.props.handleLogout}
+        loggedIn={true}
+        currentName={this.props.currentName}
+        />
         <LeadForm
           currentId={this.props.currentId}
           newFetch={this.newFetch}
@@ -112,11 +121,17 @@ export default class Index extends Component {
       </div>
     ) : (
       <div>
+        <NavBar
+        handleCardClick={this.handleCardClick}
+        handleLogout={this.props.handleLogout}
+        currentName={this.props.currentName}
+        loggedIn={true}
+        />
         <LeadSpec
-          handleCardClick={this.handleCardClick}
           lead={this.state.clickedLead}
         />
       </div>
     );
+  
   }
 }
