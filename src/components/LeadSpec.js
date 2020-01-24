@@ -116,17 +116,25 @@ export default function Leadspec(props) {
               Add a note
             </Fab>
             {clicked === true ? (
-              <div>
-                <NoteForm leadId={props.lead.id} />
-              </div>
-            ) : (
-              <div>
-                <br></br>
-              </div>
-            )}
-          </Grid>
-        </div>
-      </Grid>
-    </Fragment>
-  );
+            <div>
+                <NoteForm
+                getLeadNotes={() => getLeadNotes}
+                 leadId={props.lead.id}/>
+            </div>
+          ) : (
+            <div>
+            </div>
+          )}
+          <h3>Your notes: </h3>
+          {data.map(leadNote => (
+        <NoteCard
+            id={leadNote.id}
+            note={leadNote}
+         />
+      ))}
+            </Fragment>
+
+          
+    )
+
 }
