@@ -23,11 +23,9 @@ const useStyles = makeStyles(theme => ({
     }
   },
   extendedIcon: {
-
     marginRight: theme.spacing(1)
   }
 }));
-
 
 export default function Leadspec(props) {
   const API = "http://localhost:3000/notes";
@@ -36,11 +34,9 @@ export default function Leadspec(props) {
   const [statusClicked, setStatusClicked] = useState(false);
   const classes = useStyles();
 
-
   useEffect(() => {
     getLeadNotes();
   }, []);
-
 
   let getLeadNotes = () => {
     fetch(API)
@@ -70,12 +66,11 @@ export default function Leadspec(props) {
           <h1>Job Title: {props.lead.title}</h1>
           <h2>Company: {props.lead.company}</h2>
           <h3>Location: {props.lead.location}</h3>
-          <h3>Description: {props.lead.description}</h3>
+          <p>Description: {props.lead.description}</p>
           <h3>Status: {props.lead.status}</h3>
         </div>
       </Grid>
       <div className={classes.paper}>
-        
         <Fab
           onClick={() => handleChangeStatusClick()}
           color="secondary"
