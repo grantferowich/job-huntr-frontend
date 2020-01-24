@@ -23,19 +23,25 @@ const useStyles = makeStyles(theme => ({
     }
   },
   extendedIcon: {
-    marginRight: theme.spacing(1),
-    alignItems: "center"
+
+    marginRight: theme.spacing(1)
   }
 }));
+
+
 export default function Leadspec(props) {
   const API = "http://localhost:3000/notes";
   const [data, setData] = useState([]);
   const [clicked, setClicked] = useState(false);
   const [statusClicked, setStatusClicked] = useState(false);
   const classes = useStyles();
+
+
   useEffect(() => {
     getLeadNotes();
   }, []);
+
+
   let getLeadNotes = () => {
     fetch(API)
       .then(res => res.json())
@@ -43,12 +49,14 @@ export default function Leadspec(props) {
         setData(data.filter(note => note.lead_id === props.lead.id));
       });
   };
+
   let handleAddNoteClick = () => {
     setClicked(!clicked);
   };
   let handleChangeStatusClick = () => {
     setStatusClicked(!statusClicked);
   };
+
   return (
     <Fragment>
       <Grid
@@ -78,6 +86,7 @@ export default function Leadspec(props) {
           Update Status
         </Fab>
       </div>
+
       {statusClicked === true ? (
         <Grid item size="xs">
           <div>
@@ -96,6 +105,7 @@ export default function Leadspec(props) {
           ))}
         </div>
       </Grid>
+
       <Fab
         onClick={() => handleAddNoteClick()}
         color="secondary"
@@ -115,4 +125,3 @@ export default function Leadspec(props) {
     </Fragment>
   );
 }
-

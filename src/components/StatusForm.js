@@ -7,15 +7,14 @@ import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import AssignmentSharpIcon from '@material-ui/icons/AssignmentSharp';import Typography from "@material-ui/core/Typography";
+import AssignmentSharpIcon from "@material-ui/icons/AssignmentSharp";
+import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-
-
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -38,10 +37,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function StatusForm(props) {
-    const [status, setStatus] = useState("");
-    const [open, setOpen] = useState("");
+  const [status, setStatus] = useState("");
+  const [open, setOpen] = useState("");
   const classes = useStyles();
-
 
   const handleStatusChange = event => {
     setStatus(event.target.value);
@@ -53,20 +51,19 @@ export default function StatusForm(props) {
     setOpen(true);
   };
 
-
   const API = `http://localhost:3000/leads/${props.leadId}`;
 
   let handleSubmit = event => {
     event.preventDefault();
 
     fetch(API, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({status: status})
-      })   
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({ status: status })
+    }).then(props.newFetch());
   };
 
   return (
@@ -84,7 +81,7 @@ export default function StatusForm(props) {
           className={classes.form}
           noValidate
         >
-             <FormControl className={classes.formControl}>
+          <FormControl className={classes.formControl}>
             <InputLabel id="demo-controlled-open-select-label">
               Status
             </InputLabel>
@@ -114,11 +111,9 @@ export default function StatusForm(props) {
           >
             Change Status
           </Button>
-          
         </form>
       </div>
-      <Box mt={8}>
-      </Box>
+      <Box mt={8}></Box>
     </Container>
   );
 }
