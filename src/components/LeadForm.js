@@ -52,7 +52,7 @@ export default function LeadForm(props) {
 
   const classes = useStyles();
 
-  const API = "http://localhost:3000/leads";
+  const API = "https://backend-jobhuntr.herokuapp.com/leads";
 
   let handleSubmit = event => {
     event.preventDefault();

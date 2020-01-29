@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Leadspec(props) {
-  const API = "http://localhost:3000/notes";
+  const API = "https://backend-jobhuntr.herokuapp.com/notes";
   const [data, setData] = useState([]);
   const [clicked, setClicked] = useState(false);
   const [statusClicked, setStatusClicked] = useState(false);

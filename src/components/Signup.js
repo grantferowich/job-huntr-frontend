@@ -38,7 +38,7 @@ export default function Signup(props) {
   const [password, setPassword] = useState("");
   const classes = useStyles();
 
-  const API = "http://localhost:3000/users";
+  const API = "https://backend-jobhuntr.herokuapp.com/users";
 
   let handleSubmit = event => {
     event.preventDefault();

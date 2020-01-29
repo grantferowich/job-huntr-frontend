@@ -17,7 +17,7 @@ export default class Index extends Component {
     clickedLead: null
   };
 
-  API = "http://localhost:3000/leads";
+  API = "https://backend-jobhuntr.herokuapp.com/leads";
 
   newFetch = () => {
     fetch(this.API)

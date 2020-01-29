@@ -51,7 +51,7 @@ export default function StatusForm(props) {
     setOpen(true);
   };
 
-  const API = `http://localhost:3000/leads/${props.leadId}`;
+  const API = `https://backend-jobhuntr.herokuapp.com/leads/${props.leadId}`;
 
   let handleSubmit = event => {
     event.preventDefault();

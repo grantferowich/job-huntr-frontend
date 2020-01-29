@@ -41,16 +41,10 @@ export default function NoteForm(props) {
     setNote(event.target.value);
   };
 
-  const API = "http://localhost:3000/notes";
+  const API = "https://backend-jobhuntr.herokuapp.com/notes";
 
   let handleSubmit = event => {
     event.preventDefault();
-    
-
-    // let data = {
-    //     lead_id: props.leadId,
-    //   content: note
-    // };
 
     fetch(API, {
       method: "POST",
@@ -59,7 +53,9 @@ export default function NoteForm(props) {
         Accept: "application/json"
       },
       body: JSON.stringify({ lead_id: props.leadId, content: note })
-    }).then(props.getLeadNotes()).then(setNote(''));
+    })
+      .then(props.getLeadNotes())
+      .then(setNote(""));
   };
 
   return (
@@ -69,9 +65,7 @@ export default function NoteForm(props) {
         <Avatar className={classes.avatar}>
           <AssignmentSharpIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
-          {/* Sign in */}
-        </Typography>
+
         <form
           onSubmit={event => handleSubmit(event)}
           className={classes.form}
