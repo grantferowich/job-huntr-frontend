@@ -17,7 +17,7 @@ export default class Index extends Component {
     clickedLead: null
   };
 
-  API = "https://backend-jobhuntr.herokuapp.com/leads";
+  API = "http://backend-jobhuntr.herokuapp.com/leads";
 
   newFetch = () => {
     fetch(this.API)
@@ -37,6 +37,7 @@ export default class Index extends Component {
       clicked: false
     });
   };
+
   handleCardClick = lead => {
     this.setState(
       {
